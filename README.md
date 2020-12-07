@@ -1,27 +1,51 @@
-# CodeSquad-test
-step-1
-1단계: 단어 밀어내기 구현
+# CodeSquad-test (step-2)
 
-prompt를 통해 input변수에 각각의 단어, 숫자, 방향을 입력받았음
+## 2단계: 평면큐브 구현하기
 
-만약 'q'가 입력된다면 종료 문구를 콘솔창에 출력
-
-
-함수 userInput : 사용자로부터 입력받은 정보를 info 객체에 저장함.
-
--입력받은 단어는 split을 이용해 각각의 문자로 나눔
--입력받은 숫자는 Number를 통해 타입을 숫자로 전환
--입력받은 방향(L 또는 R)은 대문자로 변환하여, 소문자를 입력받아도 변함이 없게 구현
-
-함수 ChangeAbs : 음수를 입력받으면 Math.abs를 통해 절대값으로 변환
-
-
-함수 Lshift, Rshift : info 객체에 저장된 단어를 입력받은 숫자만큼 밀어냄
-- shift, push, pop, unshift를 활용 
-- 만약 음수라면 입력된 방향의 반대방향의 함수를 실행되게 구현
+------
+### 큐브 객체 선언
+2차원 배열과 추후 input값을 입력받기 위한 movement 배열을 선언하였음
+  const cube = {
+  arr: [
+    ['R', 'R', 'W'],
+    ['G', 'C', 'W'],
+    ['G', 'B', 'B'],
+  ],
+  movement: [],
+};
 
 
-함수 checkNumber : 입력받은 숫자가 -100이상 +100미만인지 확인 후 리턴 값 전달
+
+### 함수
+displayCube : 큐브 2차원 배열을 화면에 3*3표로 출력
+  function displayCube() {
+  for (let i = 0; i < cube.arr.length; i++) {
+    for (let j = 0; j < cube.arr.length; j++) {
+      const text = document.createElement('div');
+      text.textContent = cube.arr[i][j];
+      text.className = 'item-value';
+      text.id = `${i}${j}`;
+      container.appendChild(text);
+    }
+  }
+}
+
+removeBtns : 만들어진 3*3표를 제거
+  function removeBtns() {
+  const number = Math.pow(cube.arr.length, 2);
+  for (let i = 0; i < number; i++) {
+    container.removeChild(container.childNodes[0]);
+  }
+}
+
+
+upLeft : input에 입력받은 문자를 확인 후, 2차원 배열 가장 윗줄을 왼쪽으로 한칸 밀어냄.
+  function upLeft() {
+  const temp = cube.arr[0].shift();
+  cube.arr[0].push(temp);
+  removeBtns();
+  displayCube();
+}
 
 
 
