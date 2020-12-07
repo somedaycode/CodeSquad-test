@@ -67,7 +67,7 @@ function changeAbs(number) {
 // 실행함수
 function main() {
   const input = prompt(
-    '단어, 숫자, L 또는 R을 차례대로 입력해주세요. ex) apple 3 L'
+    '단어와 숫자 그리고 L 또는 R을 차례대로 입력해주세요. ex) apple 3 L'
   );
   if (checkNumber(input) === 1) return main();
   if (input === 'q') return console.log('종료하였습니다.');
