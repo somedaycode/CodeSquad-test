@@ -26,7 +26,7 @@ body {
     align-items: center;
 }
 
-#movement:focus::-webkit-input-placeholder{
+#input-order:focus::-webkit-input-placeholder{
     color: transparent;
 }
 
