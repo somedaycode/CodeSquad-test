@@ -30,6 +30,8 @@ function removeBtns() {
   }
 }
 
+// 큐브 동작 함수
+
 function upLeft() {
   const temp = cube.arr[0].shift();
   cube.arr[0].push(temp);
@@ -37,18 +39,23 @@ function upLeft() {
   displayCube();
 }
 
-function init() {
+function upRight() {
+  const temp = cube.arr[0].pop();
+  cube.arr[0].unshift(temp);
+  removeBtns();
   displayCube();
-  btn.addEventListener('click', (e) => {
-    cube.movement.push(input.value);
-    const inputText = document.querySelector('.input-text');
-    inputText.textContent = input.value;
-    if (input.value === 'U') {
-      upLeft();
-    }
-    // cube.movement = [];
-    input.value = '';
-  });
 }
 
-init();
+const btnHandler = (e) => {
+  const inputText = document.querySelector('.input-text');
+  inputText.textContent = input.value;
+  cube.movement.push(input.value);
+  input.value = '';
+};
+
+function main() {
+  displayCube();
+  btn.addEventListener('click', btnHandler);
+}
+
+main();
