@@ -1,5 +1,6 @@
 # CodeSquad-test
 step-1
+1단계: 단어 밀어내기 구현
 
 prompt를 통해 input변수에 각각의 단어, 숫자, 방향을 입력받았음
 
