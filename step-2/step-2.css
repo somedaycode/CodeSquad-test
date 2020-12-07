@@ -1,0 +1,29 @@
+html,
+body {
+    margin: 0;
+    padding: 0;
+}
+
+#container {
+    height: 400px;
+    width: 400px;
+    background-color: cornsilk;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.item-value {
+    margin: 5px;
+    height: 120px;
+    width: 120px;
+    border: solid 1px black;
+    background-color: burlywood;
+    font-size: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
