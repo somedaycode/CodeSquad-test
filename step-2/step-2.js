@@ -40,9 +40,14 @@ function upLeft() {
 function init() {
   displayCube();
   btn.addEventListener('click', (e) => {
+    cube.movement.push(input.value);
+    const inputText = document.querySelector('.input-text');
+    inputText.textContent = input.value;
     if (input.value === 'U') {
       upLeft();
     }
+    // cube.movement = [];
+    input.value = '';
   });
 }
 
