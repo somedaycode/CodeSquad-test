@@ -11,8 +11,18 @@ function usersInput(input) {
 
   const words = input.split(' ')[0];
   info.word = words.split('');
-  info.number = Number(input.split(' ')[1]);
+  info.number = checkNumber(input);
   info.direction = input.split(' ')[2].toUpperCase();
+}
+
+function checkNumber(input) {
+  const number = Number(input.split(' ')[1]);
+  if (number >= 100 || number < -100) {
+    console.log('-100이상 100미만의 숫자를 입력해주세요.');
+    return 1;
+  } else {
+    return number;
+  }
 }
 
 // 단어를 왼쪽으로 사용자가 입력한 숫자만큼 밀어낸다.
@@ -59,15 +69,16 @@ function main() {
   const input = prompt(
     '단어, 숫자, L 또는 R을 차례대로 입력해주세요. ex) apple 3 L'
   );
-  if (input === 'q') {
-    return console.log('종료하였습니다.');
-  }
+  if (checkNumber(input) === 1) return main();
+  if (input === 'q') return console.log('종료하였습니다.');
 
   usersInput(input);
   if (info.direction === 'L') {
     Lshift();
   } else if (info.direction === 'R') {
     Rshift();
+  } else {
+    console.log('L 또는 R이 아닙니다.');
   }
 
   main();
