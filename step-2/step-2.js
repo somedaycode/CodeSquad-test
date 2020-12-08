@@ -11,6 +11,7 @@ const cube = {
   movement: [],
 };
 
+// 큐브 배열 값에 따른 화면 구성 함수
 function displayCube() {
   for (let i = 0; i < cube.arr.length; i++) {
     for (let j = 0; j < cube.arr.length; j++) {
@@ -30,8 +31,7 @@ function removeBtns() {
   }
 }
 
-// 큐브 동작 함수
-
+// 명령에 따른 큐브 동작 함수
 function upLeft(move) {
   if (move !== 'U') return;
   const temp = cube.arr[0].shift();
@@ -50,8 +50,8 @@ function upRight(move) {
 
 function bottomLeft(move) {
   if (move !== `B'`) return;
-  const lastArrNum = cube.arr.length - 1;
-  const temp = cube.arr[lastArrNum].shift();
+  const lastArr = cube.arr.length - 1;
+  const temp = cube.arr[lastArr].shift();
   cube.arr[lastArrNum].push(temp);
   removeBtns();
   displayCube();
@@ -59,9 +59,27 @@ function bottomLeft(move) {
 
 function bottomRight(move) {
   if (move !== `B`) return;
-  const lastArrNum = cube.arr.length - 1;
+  const lastArr = cube.arr.length - 1;
   const temp = cube.arr[lastArrNum].pop();
-  cube.arr[lastArrNum].unshift(temp);
+  cube.arr[lastArr].unshift(temp);
+  removeBtns();
+  displayCube();
+}
+
+function rightUp(move) {
+  if (move !== `R`) return;
+  const firstArrLen = cube.arr[0].length;
+  const temp = [];
+  for (let i = 0; i < firstArrLen; i++) {
+    const str = cube.arr[i].pop();
+    temp.push(str);
+  }
+  temp.push(temp.shift());
+
+  for (let i = 0; i < temp.length; i++) {
+    cube.arr[i][temp.length - 1] = temp[i];
+  }
+
   removeBtns();
   displayCube();
 }
@@ -79,6 +97,7 @@ function checkApostrophe(moveOrder) {
   return moves;
 }
 
+// 큐브 동작
 function moveCube() {
   const moveOrder = cube.movement.join('').split('');
   const finalMove = checkApostrophe(moveOrder);
@@ -87,6 +106,7 @@ function moveCube() {
     upRight(move);
     bottomRight(move);
     bottomRight(move);
+    rightUp(move);
     // console.log(move);
     // console.table(cube.arr);
   });
