@@ -48,6 +48,25 @@ function upRight(move) {
   displayCube();
 }
 
+function bottomLeft(move) {
+  if (move !== `B'`) return;
+  const lastArrNum = cube.arr.length - 1;
+  const temp = cube.arr[lastArrNum].shift();
+  cube.arr[lastArrNum].push(temp);
+  removeBtns();
+  displayCube();
+}
+
+function bottomRight(move) {
+  if (move !== `B`) return;
+  const lastArrNum = cube.arr.length - 1;
+  const temp = cube.arr[lastArrNum].pop();
+  cube.arr[lastArrNum].unshift(temp);
+  removeBtns();
+  displayCube();
+}
+
+// 작은따옴표 문자 검사
 function checkApostrophe(moveOrder) {
   const moves = moveOrder;
   for (let i = 0; i < moves.length; i++) {
@@ -66,12 +85,15 @@ function moveCube() {
   finalMove.forEach((move) => {
     upLeft(move);
     upRight(move);
+    bottomRight(move);
+    bottomRight(move);
     // console.log(move);
     // console.table(cube.arr);
   });
   cube.movement = [];
 }
 
+// 확인버튼
 const btnHandler = (e) => {
   const inputText = document.querySelector('.input-text');
   inputText.textContent = input.valuer;
