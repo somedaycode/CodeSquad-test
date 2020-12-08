@@ -60,7 +60,7 @@ function bottomLeft(move) {
 function bottomRight(move) {
   if (move !== `B`) return;
   const lastArr = cube.arr.length - 1;
-  const temp = cube.arr[lastArrNum].pop();
+  const temp = cube.arr[lastArr].pop();
   cube.arr[lastArr].unshift(temp);
   removeBtns();
   displayCube();
@@ -68,14 +68,13 @@ function bottomRight(move) {
 
 function rightUp(move) {
   if (move !== `R`) return;
-  const firstArrLen = cube.arr[0].length;
-  const temp = [];
-  for (let i = 0; i < firstArrLen; i++) {
-    const str = cube.arr[i].pop();
-    temp.push(str);
-  }
-  temp.push(temp.shift());
 
+  // 각 배열의 마지막 문자를 temp에 저장
+  const temp = cube.arr.map((cubeArr) => {
+    return cubeArr[cubeArr.length - 1];
+  });
+  // 가장 앞의 문자를 뒤로 옮김
+  temp.push(temp.shift());
   for (let i = 0; i < temp.length; i++) {
     cube.arr[i][temp.length - 1] = temp[i];
   }
@@ -107,7 +106,7 @@ function moveCube() {
     bottomRight(move);
     bottomRight(move);
     rightUp(move);
-    // console.log(move);
+    // console.log(move);         //콘솔 출력
     // console.table(cube.arr);
   });
   cube.movement = [];
@@ -124,8 +123,8 @@ const btnHandler = (e) => {
 };
 
 function main() {
+  // console.table(cube.arr); // 초기값을 콘솔창에 출력
   displayCube();
-  console.table(cube.arr);
   btn.addEventListener('click', btnHandler);
 }
 
