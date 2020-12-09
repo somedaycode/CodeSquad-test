@@ -83,6 +83,22 @@ function rightUp(move) {
   displayCube();
 }
 
+function rightDown(move) {
+  if (move !== `R'`) return;
+
+  const temp = cube.arr.map((cubeArr) => {
+    return cubeArr[cubeArr.length - 1];
+  });
+
+  temp.unshift(temp.pop());
+  for (let i = 0; i < temp.length; i++) {
+    cube.arr[i][temp.length - 1] = temp[i];
+  }
+
+  removeBtns();
+  displayCube();
+}
+
 // 작은따옴표 문자 검사
 function checkApostrophe(moveOrder) {
   const moves = moveOrder;
@@ -106,6 +122,7 @@ function moveCube() {
     bottomRight(move);
     bottomRight(move);
     rightUp(move);
+    rightDown(move);
     // console.log(move);         //콘솔 출력
     // console.table(cube.arr);
   });
