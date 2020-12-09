@@ -131,14 +131,6 @@ function LeftUp(move) {
   displayCube();
 }
 
-function LeftUp(move) {
-  if (move !== `Q`) return;
-  const inputText = document.querySelector('.input-text');
-  inputText.textContent = 'Bye~';
-  console.log('Bye~');
-  removeBtns();
-}
-
 // 큐브 방향 명령 함수 모음
 function cubeDirection(move) {
   upLeft(move);
@@ -151,6 +143,14 @@ function cubeDirection(move) {
   LeftUp(move);
 }
 
+// 평면큐브 종료
+function quit(move) {
+  if (move !== `Q`) return;
+  const inputText = document.querySelector('.input-text');
+  inputText.textContent = 'Bye~';
+  console.log('Bye~');
+  removeBtns();
+}
 // 작은따옴표 문자 검사
 function checkApostrophe(moveOrder) {
   const moves = moveOrder;
@@ -169,9 +169,10 @@ function moveCube() {
   const moveOrder = cube.movement.join('').split('');
   const finalMove = checkApostrophe(moveOrder);
   finalMove.forEach((move) => {
+    if (move === 'Q') return quit(move);
     cubeDirection(move);
-    // console.log(move);         //콘솔 출력
-    // console.table(cube.arr);
+    console.log(move); //콘솔 출력
+    console.table(cube.arr);
   });
   cube.movement = [];
 }
@@ -181,13 +182,13 @@ const btnHandler = (e) => {
   const inputText = document.querySelector('.input-text');
   inputText.textContent = input.valuer;
   cube.movement.push(input.value);
-  // console.log(`CUBE> ${input.value}`); // 콘솔창 출력
+  console.log(`CUBE> ${input.value}`); // 콘솔창 출력
   input.value = '';
   moveCube();
 };
 
 function main() {
-  // console.table(cube.arr); // 초기값을 콘솔창에 출력
+  console.table(cube.arr); // 초기값을 콘솔창에 출력
   displayCube();
   btn.addEventListener('click', btnHandler);
 }
