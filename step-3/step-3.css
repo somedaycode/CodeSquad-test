@@ -1,0 +1,105 @@
+* {
+    box-sizing: border-box;
+}
+
+h1 {
+    margin-left: 16px;
+}
+
+.cube-wrapper {
+    margin: 20px;
+    position: relative;
+    height: 500px;
+    width: 700px;
+    background-color: rgb(241, 242, 246);
+}
+
+.cube {
+    height: 150px;
+    width: 150px;
+}
+
+#c1 {
+    position: absolute;
+    left: 150px;
+    background-color: rgb(236, 204, 104);
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.color1 {
+    height: 50px;
+    width: 50px;
+    border: black 1px solid;
+}
+
+#c2 {
+    position: relative;
+    top: 300px;
+    left: 150px;
+    background-color: rgb(123, 237, 159);
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.color2 {
+    height: 50px;
+    width: 50px;
+    border: black 1px solid;
+}
+
+#c3 {
+    margin: 0;
+    position: absolute;
+    left: 150px;
+    background-color: rgb(255, 127, 80);
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.color3 {
+    height: 50px;
+    width: 50px;
+    border: black 1px solid;
+}
+
+#c4 {
+    margin: 0;
+    position: absolute;
+    left: 300px;
+    background-color: rgb(155, 89, 182);
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.color4 {
+    height: 50px;
+    width: 50px;
+    border: black 1px solid;
+}#c5 {
+    margin: 0;
+    position: absolute;
+    left: 450px;
+    background-color: rgb(112, 161, 255);
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.color5 {
+    height: 50px;
+    width: 50px;
+    border: black 1px solid;
+}
+
+#c6 {
+    position: absolute;
+    background-color:rgb(255, 107, 129);
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.color6 {
+    height: 50px;
+    width: 50px;
+    border: black 1px solid;
+}
