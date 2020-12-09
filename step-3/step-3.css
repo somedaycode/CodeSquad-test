@@ -1,17 +1,32 @@
+:root {
+    --background-color: #bdc3c7;
+    --font-color: #130f40;
+
+}
+
 * {
     box-sizing: border-box;
 }
 
 h1 {
     margin-left: 16px;
+    color: var(--font-color);
+}
+
+p {
+    color: var(--font-color);
+}
+
+body{
+    background-color: var(--background-color);
 }
 
 .cube-wrapper {
+    background-color: var(--background-color);
     margin: 20px;
     position: relative;
     height: 500px;
     width: 700px;
-    background-color: rgb(241, 242, 246);
 }
 
 .cube {
@@ -102,4 +117,29 @@ h1 {
     height: 50px;
     width: 50px;
     border: black 1px solid;
+}
+
+.input-text {
+    height: 30px;
+}
+
+.btn {
+    margin: 5px;
+    width: 100px;
+    height: 40px;
+    color: #130f40;
+    font-weight: bold;
+    font-size: 16px;
+    font-family: Arial, Helvetica, sans-serif;
+    outline: none;
+    border-style: none;
+    border-radius: 12px;
+    background: #bdc3c7;
+    box-shadow: inset -5px -5px 6px #a1a6a9, 
+                inset 5px 5px 6px #d9e0e5;
+}
+
+.btn:hover {
+    cursor: pointer;
+    transform: scale(1.15);
 }
