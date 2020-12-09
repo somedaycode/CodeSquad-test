@@ -69,7 +69,7 @@ function bottomRight(move) {
 function rightUp(move) {
   if (move !== `R`) return;
 
-  // 각 배열의 마지막 문자를 temp에 저장
+  // 각 배열의 마지막 문자를 temp에 저장.
   const temp = cube.arr.map((cubeArr) => {
     return cubeArr[cubeArr.length - 1];
   });
