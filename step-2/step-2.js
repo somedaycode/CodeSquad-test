@@ -52,7 +52,7 @@ function bottomLeft(move) {
   if (move !== `B'`) return;
   const lastArr = cube.arr.length - 1;
   const temp = cube.arr[lastArr].shift();
-  cube.arr[lastArrNum].push(temp);
+  cube.arr[lastArr].push(temp);
   removeBtns();
   displayCube();
 }
@@ -99,6 +99,50 @@ function rightDown(move) {
   displayCube();
 }
 
+function LeftDown(move) {
+  if (move !== `L`) return;
+
+  const temp = cube.arr.map((cubeArr) => {
+    return cubeArr[0];
+  });
+
+  temp.unshift(temp.pop());
+  for (let i = 0; i < temp.length; i++) {
+    cube.arr[i][0] = temp[i];
+  }
+
+  removeBtns();
+  displayCube();
+}
+
+function LeftUp(move) {
+  if (move !== `L'`) return;
+
+  const temp = cube.arr.map((cubeArr) => {
+    return cubeArr[0];
+  });
+
+  temp.push(temp.shift());
+  for (let i = 0; i < temp.length; i++) {
+    cube.arr[i][0] = temp[i];
+  }
+
+  removeBtns();
+  displayCube();
+}
+
+// 큐브 방향 명령 함수 모음
+function cubeDirection(move) {
+  upLeft(move);
+  upRight(move);
+  bottomRight(move);
+  bottomLeft(move);
+  rightUp(move);
+  rightDown(move);
+  LeftDown(move);
+  LeftUp(move);
+}
+
 // 작은따옴표 문자 검사
 function checkApostrophe(moveOrder) {
   const moves = moveOrder;
@@ -117,12 +161,7 @@ function moveCube() {
   const moveOrder = cube.movement.join('').split('');
   const finalMove = checkApostrophe(moveOrder);
   finalMove.forEach((move) => {
-    upLeft(move);
-    upRight(move);
-    bottomRight(move);
-    bottomRight(move);
-    rightUp(move);
-    rightDown(move);
+    cubeDirection(move);
     // console.log(move);         //콘솔 출력
     // console.table(cube.arr);
   });
