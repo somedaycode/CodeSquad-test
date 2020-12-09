@@ -131,6 +131,14 @@ function LeftUp(move) {
   displayCube();
 }
 
+function LeftUp(move) {
+  if (move !== `Q`) return;
+  const inputText = document.querySelector('.input-text');
+  inputText.textContent = 'Bye~';
+  console.log('Bye~');
+  removeBtns();
+}
+
 // 큐브 방향 명령 함수 모음
 function cubeDirection(move) {
   upLeft(move);
