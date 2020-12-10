@@ -3,6 +3,7 @@ const startBtn = document.querySelector('.btn-start');
 const cube = {
   movement: [],
 };
+
 // 화면에 큐브를 출력
 function displayCube() {
   let count = 0;
@@ -39,11 +40,46 @@ function putValues(number) {
 
 function startBtnHandler(e) {
   const inputText = document.querySelector('.input-text');
-  const inputOrder = document.querySelector('.order');
+  const inputOrder = document.querySelector('.input-order');
   inputOrder.textContent = inputText.value;
   cube.movement.push(inputText.value);
   inputText.value = '';
   console.log(cube.movement);
+  moveCube();
+}
+
+// 작은따옴표 문자 검사
+function checkApostrophe(moveOrder) {
+  const moves = moveOrder;
+  for (let i = 0; i < moves.length; i++) {
+    if (moves[i] === `'`) {
+      const merge = moves[i - 1].concat(`'`);
+      moves.splice(i, 1);
+      moves[i - 1] = merge;
+    }
+  }
+  return moves;
+}
+
+function quit(move) {
+  if (move !== `Q`) return;
+  const inputOrder = document.querySelector('.input-order');
+  inputOrder.textContent = 'Bye~';
+  console.log('Bye~');
+}
+
+// 큐브 동작
+function moveCube() {
+  const moveOrder = cube.movement.join('').split('');
+  console.log(moveOrder);
+  const finalMove = checkApostrophe(moveOrder);
+  finalMove.forEach((move) => {
+    if (move === 'Q') return quit(move);
+    else {
+      console.log('test');
+    }
+  });
+  cube.movement = [];
 }
 
 function main() {
