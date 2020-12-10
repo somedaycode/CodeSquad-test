@@ -1,3 +1,8 @@
+const startBtn = document.querySelector('.btn-start');
+
+const cube = {
+  movement: [],
+};
 // 화면에 큐브를 출력
 function displayCube() {
   let count = 0;
@@ -32,13 +37,23 @@ function putValues(number) {
   return cubeMaker;
 }
 
+function startBtnHandler(e) {
+  const inputText = document.querySelector('.input-text');
+  const inputOrder = document.querySelector('.order');
+  inputOrder.textContent = inputText.value;
+  cube.movement.push(inputText.value);
+  inputText.value = '';
+  console.log(cube.movement);
+}
+
 function main() {
-  const cube = {};
   displayCube();
   for (let i = 1; i < 7; i++) {
     // 총 6개의 cube.color를 생성
     cube[`color${i}`] = putValues(i);
   }
+
+  startBtn.addEventListener('click', startBtnHandler);
   console.log(cube);
 }
 
