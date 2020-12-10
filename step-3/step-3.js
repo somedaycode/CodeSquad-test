@@ -52,9 +52,17 @@ function putValues(number) {
 
 function frontClockwise(move) {
   if (move !== 'F') return;
+  const tempName = [];
 
-  cube.color4.map((v) => {
-    v[0].className = 'color1';
+  for (let i = 0; i < 3; i++) {
+    tempName.push(cube.color1[2][i].className);
+    cube.color1[2][i].className = cube.color6[i][2].className;
+    cube.color6[i][2].className = cube.color2[0][i].className;
+    cube.color2[0][i].className = cube.color4[i][0].className;
+    // cube.color4[i][0].className = tempName[2][i].className;
+  }
+  cube.color4.map((arr) => {
+    arr[0].className = tempName.shift();
   });
 }
 
