@@ -37,7 +37,6 @@ body{
 #c1 {
     position: absolute;
     left: 150px;
-    background-color: rgb(236, 204, 104);
     display: flex;
     flex-wrap: wrap;
 }
@@ -46,13 +45,13 @@ body{
     height: 50px;
     width: 50px;
     border: black 1px solid;
+    background-color: rgb(236, 204, 104);
 }
 
 #c2 {
     position: relative;
     top: 300px;
     left: 150px;
-    background-color: rgb(123, 237, 159);
     display: flex;
     flex-wrap: wrap;
 }
@@ -61,13 +60,13 @@ body{
     height: 50px;
     width: 50px;
     border: black 1px solid;
+    background-color: rgb(123, 237, 159);
 }
 
 #c3 {
     margin: 0;
     position: absolute;
     left: 150px;
-    background-color: rgb(255, 127, 80);
     display: flex;
     flex-wrap: wrap;
 }
@@ -76,13 +75,13 @@ body{
     height: 50px;
     width: 50px;
     border: black 1px solid;
+    background-color: rgb(255, 127, 80);
 }
 
 #c4 {
     margin: 0;
     position: absolute;
     left: 300px;
-    background-color: rgb(155, 89, 182);
     display: flex;
     flex-wrap: wrap;
 }
@@ -91,11 +90,11 @@ body{
     height: 50px;
     width: 50px;
     border: black 1px solid;
+    background-color: rgb(155, 89, 182);
 }#c5 {
     margin: 0;
     position: absolute;
     left: 450px;
-    background-color: rgb(112, 161, 255);
     display: flex;
     flex-wrap: wrap;
 }
@@ -104,11 +103,11 @@ body{
     height: 50px;
     width: 50px;
     border: black 1px solid;
+    background-color: rgb(112, 161, 255);
 }
 
 #c6 {
     position: absolute;
-    background-color:rgb(255, 107, 129);
     display: flex;
     flex-wrap: wrap;
 }
@@ -117,6 +116,7 @@ body{
     height: 50px;
     width: 50px;
     border: black 1px solid;
+    background-color:rgb(255, 107, 129);
 }
 
 .input-text {
