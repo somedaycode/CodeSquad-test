@@ -171,12 +171,28 @@ function bottomClockwise(move) {
 
   for (let i = 0; i < length; i++) {
     tempName.push(cube.color1[0][i].className);
+    cube.color1[0][i].className = cube.color4[i][length - 1].className;
     cube.color4[i][length - 1].className = cube.color2[length - 1][i].className;
-    cube.color1[0][i].className = cube.color4[i][0].className;
     cube.color2[length - 1][i].className = cube.color6[i][0].className;
   }
   cube.color6.map((arr) => {
     arr[0].className = tempName.shift();
+  });
+}
+
+function bottomInvert(move) {
+  if (move !== `B'`) return;
+  const tempName = [];
+  const length = cube.color1.length;
+
+  for (let i = 0; i < length; i++) {
+    tempName.push(cube.color6[i][0].className);
+    cube.color6[i][0].className = cube.color2[length - 1][i].className;
+    cube.color2[length - 1][i].className = cube.color4[i][length - 1].className;
+    cube.color4[i][length - 1].className = cube.color1[0][length - 1].className;
+  }
+  cube.color1[0].map((arr) => {
+    arr.className = tempName.shift();
   });
 }
 
@@ -214,6 +230,7 @@ function moveCube() {
       upClockwise(move);
       upInvert(move);
       bottomClockwise(move);
+      bottomInvert(move);
       console.log('test');
     }
   });
