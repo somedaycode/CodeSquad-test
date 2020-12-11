@@ -1,6 +1,7 @@
 const startBtn = document.querySelector('.btn-start');
 const shuffleBtn = document.querySelector('.btn-shuffle');
 const resetBtn = document.querySelector('.btn-reset');
+const clock = document.querySelector('.clock');
 
 /*
 
@@ -9,6 +10,7 @@ const resetBtn = document.querySelector('.btn-reset');
 */
 
 const cube = {
+  time: 0,
   movement: [],
 };
 
@@ -319,6 +321,7 @@ function moveCube() {
 
 //실행 버튼
 function startBtnHandler(e) {
+  gameTime();
   const inputText = document.querySelector('.input-text');
   const inputOrder = document.querySelector('.input-order');
   inputOrder.textContent = inputText.value;
@@ -346,6 +349,21 @@ function reset() {
     }
   }
   main();
+}
+
+function gameTime() {
+  if (cube.time === 0) {
+    cube.time = 1;
+    const startTime = Date.now();
+    function timer() {
+      setInterval(function () {
+        const nowTime = Date.now();
+        const newTime = nowTime - startTime;
+        clock.textContent = newTime / 1000;
+      }, 250);
+    }
+    timer();
+  }
 }
 
 // 메인 함수
