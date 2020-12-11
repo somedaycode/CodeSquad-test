@@ -213,6 +213,39 @@ function leftClockwise(move) {
   });
 }
 
+function leftInvert(move) {
+  if (move !== `L'`) return;
+  let tempName = [];
+  const length = cube.color1.length;
+
+  for (let i = 0; i < length; i++) {
+    tempName.push(cube.color1[i][0].className);
+    cube.color1[i][0].className = cube.color3[i][0].className;
+    cube.color3[i][0].className = cube.color2[i][0].className;
+    cube.color2[i][0].className =
+      cube.color5[length - 1 - i][length - 1].className;
+  }
+  cube.color5.map((arr) => {
+    arr[length - 1].className = tempName.pop();
+  });
+}
+
+function downClockwise(move) {
+  if (move !== `D`) return;
+  let tempName = [];
+  const length = cube.color1.length;
+
+  for (let i = 0; i < length; i++) {
+    tempName.push(cube.color6[length - 1][i].className);
+    cube.color6[length - 1][i].className = cube.color3[length - 1][i].className;
+    cube.color3[length - 1][i].className = cube.color4[length - 1][i].className;
+    cube.color4[length - 1][i].className = cube.color5[length - 1][i].className;
+  }
+  cube.color5[length - 1].map((arr) => {
+    arr.className = tempName.shift();
+  });
+}
+
 // 작은따옴표 문자 검사
 function checkApostrophe(moveOrder) {
   const moves = moveOrder;
@@ -249,6 +282,8 @@ function moveCube() {
       bottomClockwise(move);
       bottomInvert(move);
       leftClockwise(move);
+      leftInvert(move);
+      downClockwise(move);
       console.log('test');
     }
   });
