@@ -124,13 +124,9 @@ function upClockwise(move) {
     });
   }
 
-  for (let i = 0; i < length; i++) {
-    cube.color5[0][i].className = tempName.splice(-1, 1);
+  for (let i = 0; i < 12; i++) {
+    console.log(tempName.pop());
   }
-
-  // for (let i = 0; i < length; i++) {
-  //   cube.color4[0][i].className = tempName.pop().className;
-  // }
 }
 
 // 작은따옴표 문자 검사
