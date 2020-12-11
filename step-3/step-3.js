@@ -53,15 +53,47 @@ function putValues(number) {
 function frontClockwise(move) {
   if (move !== 'F') return;
   const tempName = [];
+  const length = cube.color1.length;
 
-  for (let i = 0; i < 3; i++) {
-    tempName.push(cube.color1[2][i].className);
-    cube.color1[2][i].className = cube.color6[i][2].className;
-    cube.color6[i][2].className = cube.color2[0][i].className;
+  for (let i = 0; i < length; i++) {
+    tempName.push(cube.color1[length - 1][i].className);
+    cube.color1[length - 1][i].className = cube.color6[i][length - 1].className;
+    cube.color6[i][length - 1].className = cube.color2[0][i].className;
     cube.color2[0][i].className = cube.color4[i][0].className;
-    // cube.color4[i][0].className = tempName[2][i].className;
   }
   cube.color4.map((arr) => {
+    arr[0].className = tempName.shift();
+  });
+}
+
+function frontInvert(move) {
+  if (move !== `F'`) return;
+  const tempName = [];
+  const length = cube.color1.length;
+
+  for (let i = 0; i < length; i++) {
+    tempName.push(cube.color2[length - 1][i].className);
+    cube.color1[length - 1][i].className = cube.color4[i][length - 1].className;
+    cube.color6[i][length - 1].className = cube.color1[0][i].className;
+    cube.color2[0][i].className = cube.color6[i][0].className;
+  }
+  cube.color4.map((arr) => {
+    arr[0].className = tempName.shift();
+  });
+}
+
+function rightClockwise(move) {
+  if (move !== `R`) return;
+  const tempName = [];
+  const length = cube.color1.length;
+
+  for (let i = 0; i < length; i++) {
+    tempName.push(cube.color1[i][length - 1].className);
+    cube.color1[i][length - 1].className = cube.color3[i][length - 1].className;
+    cube.color3[i][length - 1].className = cube.color2[i][length - 1].className;
+    cube.color2[i][length - 1].className = cube.color5[i][0].className;
+  }
+  cube.color5.map((arr) => {
     arr[0].className = tempName.shift();
   });
 }
@@ -94,6 +126,8 @@ function moveCube() {
     if (move === 'Q') return quit(move);
     else {
       frontClockwise(move);
+      frontInvert(move);
+      rightClockwise(move);
       console.log('test');
     }
   });
