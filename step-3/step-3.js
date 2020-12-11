@@ -1,15 +1,16 @@
 const startBtn = document.querySelector('.btn-start');
 const shuffleBtn = document.querySelector('.btn-shuffle');
-
-const cube = {
-  movement: [],
-};
+const resetBtn = document.querySelector('.btn-reset');
 
 /*
 
 초기 화면 구성 함수
 
 */
+
+const cube = {
+  movement: [],
+};
 
 // 화면에 큐브를 출력
 function displayCube() {
@@ -335,6 +336,18 @@ function shuffleCube(e) {
   }
 }
 
+function reset() {
+  let count = 0;
+  for (let i = 0; i < 6; i++) {
+    count++;
+    const cubeContainer = document.querySelector(`#c${i + 1}`);
+    for (let j = 0; j < 9; j++) {
+      cubeContainer.removeChild(cubeContainer.childNodes[0]);
+    }
+  }
+  main();
+}
+
 // 메인 함수
 function main() {
   displayCube();
@@ -344,6 +357,8 @@ function main() {
   }
   startBtn.addEventListener('click', startBtnHandler);
   shuffleBtn.addEventListener('click', shuffleCube);
+  resetBtn.addEventListener('click', reset);
+
   console.log(cube);
 }
 
