@@ -237,6 +237,22 @@ function downClockwise(move) {
 
   for (let i = 0; i < length; i++) {
     tempName.push(cube.color6[length - 1][i].className);
+    cube.color6[length - 1][i].className = cube.color5[length - 1][i].className;
+    cube.color5[length - 1][i].className = cube.color4[length - 1][i].className;
+    cube.color4[length - 1][i].className = cube.color3[length - 1][i].className;
+  }
+  cube.color3[length - 1].map((arr) => {
+    arr.className = tempName.shift();
+  });
+}
+
+function downInvert(move) {
+  if (move !== `D'`) return;
+  let tempName = [];
+  const length = cube.color1.length;
+
+  for (let i = 0; i < length; i++) {
+    tempName.push(cube.color6[length - 1][i].className);
     cube.color6[length - 1][i].className = cube.color3[length - 1][i].className;
     cube.color3[length - 1][i].className = cube.color4[length - 1][i].className;
     cube.color4[length - 1][i].className = cube.color5[length - 1][i].className;
@@ -284,7 +300,7 @@ function moveCube() {
       leftClockwise(move);
       leftInvert(move);
       downClockwise(move);
-      console.log('test');
+      downInvert(move);
     }
   });
   cube.movement = [];
