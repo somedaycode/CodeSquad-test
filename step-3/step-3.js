@@ -139,6 +139,31 @@ function upClockwise(move) {
   }
 }
 
+function upInvert(move) {
+  if (move !== `U'`) return;
+  const tempName = [];
+  const temp = [];
+
+  for (let i = 0; i < 3; i++) {
+    tempName.push(cube.color3[0][i].className);
+    temp.push(cube.color6[0][i].className);
+    cube.color3[0][i].className = temp.shift();
+  }
+  for (let i = 0; i < 3; i++) {
+    temp.push(cube.color4[0][i].className);
+    cube.color4[0][i].className = tempName.shift();
+  }
+
+  for (let i = 0; i < 3; i++) {
+    temp.push(cube.color5[0][i].className);
+    cube.color5[0][i].className = temp.shift();
+  }
+
+  for (let i = 0; i < 3; i++) {
+    cube.color6[0][i].className = temp.shift();
+  }
+}
+
 // 작은따옴표 문자 검사
 function checkApostrophe(moveOrder) {
   const moves = moveOrder;
@@ -171,6 +196,7 @@ function moveCube() {
       rightClockwise(move);
       rightInveted(move);
       upClockwise(move);
+      upInvert(move);
       console.log('test');
     }
   });
