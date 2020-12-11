@@ -1,4 +1,5 @@
 const startBtn = document.querySelector('.btn-start');
+const shuffleBtn = document.querySelector('.btn-shuffle');
 
 const cube = {
   movement: [],
@@ -49,6 +50,20 @@ function putValues(number) {
 큐브 명령어 및 동작 함수 
 
  */
+function excuteCube(move) {
+  frontClockwise(move);
+  frontInvert(move);
+  rightClockwise(move);
+  rightInveted(move);
+  upClockwise(move);
+  upInvert(move);
+  bottomClockwise(move);
+  bottomInvert(move);
+  leftClockwise(move);
+  leftInvert(move);
+  downClockwise(move);
+  downInvert(move);
+}
 
 function frontClockwise(move) {
   if (move !== 'F') return;
@@ -289,18 +304,7 @@ function moveCube() {
   finalMove.forEach((move) => {
     if (move === 'Q') return quit(move);
     else {
-      frontClockwise(move);
-      frontInvert(move);
-      rightClockwise(move);
-      rightInveted(move);
-      upClockwise(move);
-      upInvert(move);
-      bottomClockwise(move);
-      bottomInvert(move);
-      leftClockwise(move);
-      leftInvert(move);
-      downClockwise(move);
-      downInvert(move);
+      excuteCube(move);
     }
   });
   cube.movement = [];
@@ -322,6 +326,15 @@ function startBtnHandler(e) {
   moveCube();
 }
 
+// 큐브 섞기 버튼
+function shuffleCube(e) {
+  const number = Math.floor(Math.random() * 15 + 5);
+  const move = ['URBFURLRLDFDBURDFRUBLDR'].join('').split('');
+  for (let i = 0; i < number; i++) {
+    excuteCube(move[i]);
+  }
+}
+
 // 메인 함수
 function main() {
   displayCube();
@@ -330,6 +343,7 @@ function main() {
     cube[`color${i}`] = putValues(i);
   }
   startBtn.addEventListener('click', startBtnHandler);
+  shuffleBtn.addEventListener('click', shuffleCube);
   console.log(cube);
 }
 
