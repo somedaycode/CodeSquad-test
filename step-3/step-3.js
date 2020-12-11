@@ -117,15 +117,25 @@ function rightInveted(move) {
 function upClockwise(move) {
   if (move !== `U`) return;
   const tempName = [];
-  const length = cube.color1.length;
-  for (let i = 0; i < length + 1; i++) {
-    cube[`color${i + 3}`][0].map((v) => {
-      tempName.push(v);
-    });
+  const temp = [];
+
+  for (let i = 0; i < 3; i++) {
+    tempName.push(cube.color5[0][i].className);
+    temp.push(cube.color6[0][i].className);
+    cube.color5[0][i].className = temp.shift();
+  }
+  for (let i = 0; i < 3; i++) {
+    temp.push(cube.color4[0][i].className);
+    cube.color4[0][i].className = tempName.shift();
   }
 
-  for (let i = 0; i < 12; i++) {
-    console.log(tempName.pop());
+  for (let i = 0; i < 3; i++) {
+    temp.push(cube.color3[0][i].className);
+    cube.color3[0][i].className = temp.shift();
+  }
+
+  for (let i = 0; i < 3; i++) {
+    cube.color6[0][i].className = temp.shift();
   }
 }
 
