@@ -10,7 +10,6 @@ const clock = document.querySelector('.clock');
 */
 
 const cube = {
-  time: 0,
   movement: [],
 };
 
@@ -53,6 +52,7 @@ function putValues(number) {
 큐브 명령어 및 동작 함수 
 
  */
+// 모든 동작함수를 하나로 묶어 놓은 함수
 function excuteCube(move) {
   frontClockwise(move);
   frontInvert(move);
@@ -68,6 +68,7 @@ function excuteCube(move) {
   downInvert(move);
 }
 
+// 큐브 앞면 시계방향 동작
 function frontClockwise(move) {
   if (move !== 'F') return;
   const tempName = [];
@@ -84,6 +85,7 @@ function frontClockwise(move) {
   });
 }
 
+// 큐브 앞면 반시계 방향 동작
 function frontInvert(move) {
   if (move !== `F'`) return;
   const tempName = [];
@@ -100,6 +102,7 @@ function frontInvert(move) {
   });
 }
 
+// 큐브 오른쪽면 시계방향 동작
 function rightClockwise(move) {
   if (move !== `R`) return;
   const tempName = [];
@@ -116,6 +119,7 @@ function rightClockwise(move) {
   });
 }
 
+// 큐브 오른쪽면 반시계 방향 동작
 function rightInveted(move) {
   if (move !== `R'`) return;
   const tempName = [];
@@ -132,6 +136,7 @@ function rightInveted(move) {
   });
 }
 
+// 큐브 윗면 시계방향 동작
 function upClockwise(move) {
   if (move !== `U`) return;
   const tempName = [];
@@ -148,6 +153,7 @@ function upClockwise(move) {
   });
 }
 
+// 큐브 윗면 반시계 방향 동작
 function upInvert(move) {
   if (move !== `U'`) return;
   const tempName = [];
@@ -164,6 +170,7 @@ function upInvert(move) {
   });
 }
 
+//큐브 뒷면 시계방향 동작
 function bottomClockwise(move) {
   if (move !== `B`) return;
   const tempName = [];
@@ -180,6 +187,7 @@ function bottomClockwise(move) {
   });
 }
 
+// 큐브 뒷면 반시계방향
 function bottomInvert(move) {
   if (move !== `B'`) return;
   const tempName = [];
@@ -196,6 +204,7 @@ function bottomInvert(move) {
   });
 }
 
+// 큐브 왼쪽면 시계방향 동작
 function leftClockwise(move) {
   if (move !== `L`) return;
   let tempName = [];
@@ -213,6 +222,7 @@ function leftClockwise(move) {
   });
 }
 
+// 큐브 왼쪽면 반시계방향 동작
 function leftInvert(move) {
   if (move !== `L'`) return;
   let tempName = [];
@@ -230,6 +240,7 @@ function leftInvert(move) {
   });
 }
 
+// 큐브 바닥면 시계방향 동작
 function downClockwise(move) {
   if (move !== `D`) return;
   let tempName = [];
@@ -246,6 +257,7 @@ function downClockwise(move) {
   });
 }
 
+// 큐브 바닥면 반시계방향으로 동작
 function downInvert(move) {
   if (move !== `D'`) return;
   let tempName = [];
@@ -275,14 +287,15 @@ function checkApostrophe(moveOrder) {
   return moves;
 }
 
+// Q가 입력되었을 때 종료문구를 출력
 function quit(move) {
   if (move !== `Q`) return;
   const inputOrder = document.querySelector('.input-order');
-  inputOrder.textContent = 'Bye~';
-  console.log('Bye~');
+  inputOrder.textContent = '이용해주셔서 감사합니다. 뚜뚜뚜.';
+  console.log('이용해주셔서 감사합니다.');
 }
 
-// 큐브 동작
+// 큐브 명령어를 실행
 function moveCube() {
   const moveOrder = cube.movement.join('').split('');
   const finalMove = checkApostrophe(moveOrder);
@@ -301,21 +314,17 @@ function moveCube() {
 
 */
 
-//실행 버튼
+//명령어를 실행하고 큐브를 동작시킨다.
 function startBtnHandler(e) {
   const inputText = document.querySelector('.input-text');
   const inputOrder = document.querySelector('.input-order');
-  inputOrder.textContent = inputText.value;
+  inputOrder.textContent = `${inputText.value} 조작갯수: ${inputText.value.length}`;
   cube.movement.push(inputText.value);
   inputText.value = '';
   moveCube();
-  if (cube === cube.answer) {
-    const input = document.querySelector('.input-order');
-    input.textContent = 'finish';
-  }
 }
 
-// 큐브 섞기 버튼
+// 큐브를 섞는다.
 function shuffleCube(e) {
   const number = Math.floor(Math.random() * 15 + 5);
   const move = ['URBFURLRLDFDBURDFRUBLDR'].join('').split('');
@@ -325,8 +334,9 @@ function shuffleCube(e) {
   time();
 }
 
+// 모든 화면을 초기화 시키는 함수 - 큐브를 원상태로 돌림
 function reset() {
-  const count = 0;
+  let count = 0;
   for (let i = 0; i < 6; i++) {
     count++;
     const cubeContainer = document.querySelector(`#c${i + 1}`);
@@ -337,21 +347,21 @@ function reset() {
   main();
 }
 
+// 게임 시간을 출력한다.
 function time() {
-  let newTime;
-  if (!newTime) {
-    const startTime = Date.now();
-    setInterval(() => {
-      const nowTime = Date.now();
-      newTime = nowTime - startTime;
-      clock.textContent = newTime / 1000;
-    }, 250);
-  }
+  const startTime = Date.now();
+  setInterval(() => {
+    const nowTime = Date.now();
+    newTime = nowTime - startTime;
+    clock.textContent = newTime / 1000;
+  }, 250);
 }
 
-function clearTime() {
-  clearInterval(time);
-}
+// 실행 불가 수정 필요
+// function clearTime() {
+//   clearInterval(time);
+// }
+
 // 메인 함수
 function main() {
   displayCube();
