@@ -28,7 +28,7 @@
 
 3. 확인 버튼을 누르면 btnHandler 함수에 의해서 입력된 명령어를 cube.movement에 저장 후 화면에 표시해준다. 그리고 moveCube 함수를 마지막으로 실행.
 
-# 함수: moveCube
+##### 함수: moveCube
 4. cube.movement에 저장된 명령어를 각각의 문자로 split한 후 작은따옴표 유무 검사를 위해 checkApostrophe 함수를 실행.
 
 5. cube.movement에 저장된 문자열의 길이만큼 for loop을 실행하며 작은따옴표가 있다면 그 전 순서의 문자와 병함함 - concat, 이 후 남아있는 작은따옴표는 splice를 이용해 삭제.
