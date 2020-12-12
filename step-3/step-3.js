@@ -135,51 +135,33 @@ function rightInveted(move) {
 function upClockwise(move) {
   if (move !== `U`) return;
   const tempName = [];
-  const temp = [];
+  const length = cube.color1.length;
 
-  for (let i = 0; i < 3; i++) {
-    tempName.push(cube.color5[0][i].className);
-    temp.push(cube.color6[0][i].className);
-    cube.color5[0][i].className = temp.shift();
+  for (let i = 0; i < length; i++) {
+    tempName.push(cube.color6[0][i].className);
+    cube.color6[0][i].className = cube.color3[0][i].className;
+    cube.color3[0][i].className = cube.color4[0][i].className;
+    cube.color4[0][i].className = cube.color5[0][i].className;
   }
-  for (let i = 0; i < 3; i++) {
-    temp.push(cube.color4[0][i].className);
-    cube.color4[0][i].className = tempName.shift();
-  }
-
-  for (let i = 0; i < 3; i++) {
-    temp.push(cube.color3[0][i].className);
-    cube.color3[0][i].className = temp.shift();
-  }
-
-  for (let i = 0; i < 3; i++) {
-    cube.color6[0][i].className = temp.shift();
-  }
+  cube.color5[0].map((arr) => {
+    arr.className = tempName.shift();
+  });
 }
 
 function upInvert(move) {
   if (move !== `U'`) return;
   const tempName = [];
-  const temp = [];
+  const length = cube.color1.length;
 
-  for (let i = 0; i < 3; i++) {
-    tempName.push(cube.color3[0][i].className);
-    temp.push(cube.color6[0][i].className);
-    cube.color3[0][i].className = temp.shift();
+  for (let i = 0; i < length; i++) {
+    tempName.push(cube.color5[0][i].className);
+    cube.color5[0][i].className = cube.color6[0][i].className;
+    cube.color6[0][i].className = cube.color3[0][i].className;
+    cube.color3[0][i].className = cube.color4[0][i].className;
   }
-  for (let i = 0; i < 3; i++) {
-    temp.push(cube.color4[0][i].className);
-    cube.color4[0][i].className = tempName.shift();
-  }
-
-  for (let i = 0; i < 3; i++) {
-    temp.push(cube.color5[0][i].className);
-    cube.color5[0][i].className = temp.shift();
-  }
-
-  for (let i = 0; i < 3; i++) {
-    cube.color6[0][i].className = temp.shift();
-  }
+  cube.color4[0].map((arr) => {
+    arr.className = tempName.shift();
+  });
 }
 
 function bottomClockwise(move) {
@@ -321,13 +303,16 @@ function moveCube() {
 
 //실행 버튼
 function startBtnHandler(e) {
-  gameTime();
   const inputText = document.querySelector('.input-text');
   const inputOrder = document.querySelector('.input-order');
   inputOrder.textContent = inputText.value;
   cube.movement.push(inputText.value);
   inputText.value = '';
   moveCube();
+  if (cube === cube.answer) {
+    const input = document.querySelector('.input-order');
+    input.textContent = 'finish';
+  }
 }
 
 // 큐브 섞기 버튼
@@ -337,10 +322,11 @@ function shuffleCube(e) {
   for (let i = 0; i < number; i++) {
     excuteCube(move[i]);
   }
+  time();
 }
 
 function reset() {
-  let count = 0;
+  const count = 0;
   for (let i = 0; i < 6; i++) {
     count++;
     const cubeContainer = document.querySelector(`#c${i + 1}`);
@@ -351,21 +337,21 @@ function reset() {
   main();
 }
 
-function gameTime() {
-  if (cube.time === 0) {
-    cube.time = 1;
+function time() {
+  let newTime;
+  if (!newTime) {
     const startTime = Date.now();
-    function timer() {
-      setInterval(function () {
-        const nowTime = Date.now();
-        const newTime = nowTime - startTime;
-        clock.textContent = newTime / 1000;
-      }, 250);
-    }
-    timer();
+    setInterval(() => {
+      const nowTime = Date.now();
+      newTime = nowTime - startTime;
+      clock.textContent = newTime / 1000;
+    }, 250);
   }
 }
 
+function clearTime() {
+  clearInterval(time);
+}
 // 메인 함수
 function main() {
   displayCube();
@@ -376,8 +362,6 @@ function main() {
   startBtn.addEventListener('click', startBtnHandler);
   shuffleBtn.addEventListener('click', shuffleCube);
   resetBtn.addEventListener('click', reset);
-
-  console.log(cube);
 }
 
 main();
